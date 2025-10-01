@@ -1,3 +1,5 @@
+"""
+"""
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -5,29 +7,21 @@ import seaborn as sns
 from scipy import stats
 from sklearn.preprocessing import StandardScaler
 
-# 设置中文字体
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
 
 def load_and_preprocess_data():
-    """
-    加载并预处理水文数据
-    
-    Returns:
-        tuple: (原始数据, 预处理后数据, 标准化器)
-    """
-    # 1. 加载原始数据
-    print("=== 加载原始数据 ===")
+    print(" 加载原始数据 ")
     df_raw = pd.read_excel('qingshandataforregression.xlsx')
     df_raw.columns = ['蒸发量', '降雨量', '径流量']
     print(f"数据形状: {df_raw.shape}")
     
-    # 2. 创建预处理数据副本
+    # 创建预处理数据副本
     df_processed = df_raw.copy()
     
-    # 3. 对数变换（解决偏度问题）
-    print("\n=== 对数变换 ===")
-    df_processed['降雨量_log'] = np.log1p(df_processed['降雨量'])  # log1p避免0值问题
+    # 对数变换解决偏度问题
+    print("\n 对数变换 ")
+    df_processed['降雨量_log'] = np.log1p(df_processed['降雨量'])
     df_processed['径流量_log'] = np.log1p(df_processed['径流量'])
     
     # 检查变换效果
@@ -39,12 +33,12 @@ def load_and_preprocess_data():
     print(f"降雨量_log: {df_processed['降雨量_log'].skew():.3f}")
     print(f"径流量_log: {df_processed['径流量_log'].skew():.3f}")
     
-    # 4. 标准化蒸发量
+    # 标准化蒸发量
     scaler = StandardScaler()
     df_processed['蒸发量_std'] = scaler.fit_transform(df_processed[['蒸发量']])
     
-    # 5. 异常值处理（可选：温和处理）
-    print("\n=== 异常值统计 ===")
+    # 异常值处理（可选：温和处理）
+    print("\n 异常值统计 ")
     for col in ['蒸发量', '降雨量', '径流量']:
         Q1 = df_processed[col].quantile(0.25)
         Q3 = df_processed[col].quantile(0.75)
@@ -57,9 +51,6 @@ def load_and_preprocess_data():
     return df_raw, df_processed, scaler
 
 def visualize_preprocessing_effects(df_raw, df_processed):
-    """
-    可视化预处理效果
-    """
     plt.figure(figsize=(15, 10))
     
     # 原始数据分布
@@ -92,12 +83,7 @@ def visualize_preprocessing_effects(df_raw, df_processed):
     plt.show()
 
 def prepare_modeling_data(df_processed):
-    """
-    准备建模数据
     
-    Returns:
-        dict: 包含不同特征组合的数据字典
-    """
     # 准备不同的特征组合
     data_variants = {
         'original': {
@@ -137,10 +123,10 @@ if __name__ == "__main__":
     print("\\n预处理完成！数据已保存到 'preprocessed_data.csv'")
     
     # 输出数据摘要
-    print("\\n=== 预处理数据摘要 ===")
+    print("\\n 预处理数据摘要 ")
     print(df_processed.describe())
     
-    print("\\n=== 建模数据准备完成 ===")
+    print("\\n 建模数据准备完成 ")
     for name, data in data_variants.items():
         print(f"{name}: {data['description']}")
         print(f"  特征数: {data['X'].shape[1]}, 样本数: {data['X'].shape[0]}")

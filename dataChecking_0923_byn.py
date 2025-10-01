@@ -1,3 +1,7 @@
+"""
+机器学习前提
+数据探索性分析
+"""
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -25,29 +29,7 @@ print("\n--- 缺失值检查 ---")
 print(df.isnull().sum())
 
 
-# 二、异常值检测（使用箱线图）
-print("\n--- 异常值检测 ---")
-plt.figure(figsize=(15, 5))
-
-plt.subplot(1, 3, 1)
-sns.boxplot(y=df['蒸发量'])
-plt.title('蒸发量')
-plt.ylabel('蒸发量数值')
-
-plt.subplot(1, 3, 2)
-sns.boxplot(y=df['降雨量'])
-plt.title('降雨量')
-plt.ylabel('降雨量数值')
-
-plt.subplot(1, 3, 3)
-sns.boxplot(y=df['径流量'])
-plt.title('径流量')
-plt.ylabel('径流量数值')
-
-plt.tight_layout()
-plt.show()
-
-# 三、偏度与正态性检查（为数据变换做准备）
+# 二、偏度与正态性检查
 print("\n 偏度检查 ")
 print(df.skew())
 
@@ -69,11 +51,26 @@ plt.title('径流量分布')
 plt.tight_layout()
 plt.show()
 
-print("\n 结果总结 ")
-for col in df.columns:
-    skewness = df[col].skew()
-    if abs(skewness) > 1:
-        print(f"{col.capitalize()}: 偏度为 {skewness:.2f}，表明数据存在显著的右偏。可能需要进行对数或幂变换来改善分布，以提升回归模型性能。")
-    else:
-        print(f"{col.capitalize()}: 偏度为 {skewness:.2f}，接近于0。分布相对对称，可能不需要进行变换。")
+
+# 三、异常值检测（使用箱线图）
+print("\n--- 异常值检测 ---")
+plt.figure(figsize=(15, 5))
+
+plt.subplot(1, 3, 1)
+sns.boxplot(y=df['蒸发量'])
+plt.title('蒸发量')
+plt.ylabel('蒸发量数值')
+
+plt.subplot(1, 3, 2)
+sns.boxplot(y=df['降雨量'])
+plt.title('降雨量')
+plt.ylabel('降雨量数值')
+
+plt.subplot(1, 3, 3)
+sns.boxplot(y=df['径流量'])
+plt.title('径流量')
+plt.ylabel('径流量数值')
+
+plt.tight_layout()
+plt.show()
 
