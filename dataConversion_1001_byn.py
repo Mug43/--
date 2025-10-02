@@ -53,4 +53,13 @@ X_train, X_test, y_train, y_test = train_test_split(
 print(f"\n训练集样本量: {len(X_train)}")
 print(f"测试集样本量: {len(X_test)}")
 
-# X_train, X_test, y_train, y_test 即可用于模型训练
+X_train.to_csv('X_train.csv', index=False)
+X_test.to_csv('X_test.csv', index=False)
+y_train.to_csv('y_train.csv', index=False)
+y_test.to_csv('y_test.csv', index=False)
+
+print("\n数据集已成功保存到以下文件:")
+print("- X_train.csv")
+print("- X_test.csv")
+print("- y_train.csv")
+print("- y_test.csv")
