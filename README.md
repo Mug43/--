@@ -34,7 +34,7 @@
 
 ### 环境要求
 
-- Python 3.x
+- Python 3.12
 - 必需的Python包：
   ```
   pandas
@@ -94,11 +94,17 @@ pip install pandas numpy matplotlib scikit-learn openpyxl
 
 **byn**
 
-## 📅 更新日志
+## � 仓库信息
 
-- **2024-10-02**: 完成SGD模型主程序开发
-- **2024-10-01**: 数据转换脚本优化
-- **2024-09-23**: 初始版本，数据检查功能
+- **仓库名称**: 径流作业 (Runoff Homework)
+- **GitHub**: https://github.com/Mug43/jingliu-zuoye
+
+## �📅 更新日志
+
+- **2025-10-08**: 更新README文档，完善项目说明
+- **2025-10-02**: 完成SGD模型主程序开发
+- **2025-10-01**: 数据转换脚本优化
+- **2025-09-23**: 初始版本，数据检查功能
 
 ## 📄 许可证
 
